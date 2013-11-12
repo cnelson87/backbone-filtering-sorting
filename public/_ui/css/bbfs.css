@@ -913,6 +913,9 @@ html, body {
 .data-table-container table th.hidden, .data-table-container table td.hidden {
   display: none;
 }
+.data-table-container table th.number, .data-table-container table td.number {
+  text-align: right;
+}
 .data-table-container table th {
   cursor: pointer;
   font-weight: bold;

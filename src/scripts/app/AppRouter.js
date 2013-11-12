@@ -6,6 +6,10 @@ var Items = require('./Items');
 
 var AppRouter = Backbone.Router.extend({
 
+	dataTableView: null,
+
+	items: null,
+
 	routes: {
 		"": "defaultRoute",
 		":genre": "processRoute",
@@ -16,7 +20,7 @@ var AppRouter = Backbone.Router.extend({
 
 	initialize: function() {
 
-		this.dataTableView = new DataTableView();
+		//this.dataTableView = new DataTableView();
 
 		this.getData();
 
@@ -35,27 +39,17 @@ var AppRouter = Backbone.Router.extend({
 
 	processData: function(data) {
 		var self = this;
-		// var len = data.length;
-		// var tmplDataTable = templateDataTable;
-		// var $elTarget = $('#data-target');
-		// var $elTable;
+
+		this.items = new Items();
+		this.items.add(data);
 
 
+		this.dataTableView = new DataTableView({
+			collection: this.items
+		});
 
-		// $elTarget.html(tmplDataTable(data));
-		// $elTable = $elTarget.find('table');
 
-		// var Item = Backbone.Model.extend({});
-
-		// var Items = Backbone.Collection.extend({
-		// 	model: Item,
-		// 	url: '/data/data.json'
-		// });
-
-		var items = new Items();
-		items.add(data);
-
-		this.dataTableView.collection = items;
+		//this.dataTableView.collection = items;
 		this.dataTableView.sortData();
 
 
@@ -64,7 +58,7 @@ var AppRouter = Backbone.Router.extend({
 
 
 		// Fetch some items from the url
-		//items.fetch({reset: true});
+		//this.items.fetch({reset: true});
 
 		Backbone.history.start();
 

@@ -1,0 +1,11 @@
+	{{#each .}}
+	<tr data-id="{{attributes.id}}">
+		<td><a href="/url?id={{attributes.id}}">{{attributes.Name}}</a></td>
+		<td>{{attributes.City}}</td>
+		<td>{{attributes.State}}</td>
+		<td class="hidden">{{attributes.Country}}</td>
+		<td>{{attributes.Program}}</td>
+		<td class="number">{{attributes.Year}}</td>
+		<td class="number">{{attributes.Amount}}</td>
+	</tr>
+	{{/each}}

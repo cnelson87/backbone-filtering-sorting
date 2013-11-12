@@ -1,9 +1,12 @@
 
 var templateDataTable = require('../../templates/data-table.hbs');
+var templateDataTableTbody = require('../../templates/data-table-tbody.hbs');
 
 var DataTableView = Backbone.View.extend({
 
 	template: templateDataTable,
+
+	templateTbody: templateDataTableTbody,
 
 	collection: null,
 
@@ -12,14 +15,9 @@ var DataTableView = Backbone.View.extend({
 	},
 
 	initialize: function() {
-		var self = this;
 		this.$el = $('#data-target');
-	},
-
-	render: function() {
-		//console.log(this.collection.models);
-		this.$el.html(this.template(this.collection.models));
-		return this.$el;
+		this.$el.html(this.template());
+		this.$tbody = this.$el.find('tbody');
 	},
 
 	sortColumns: function(e) {
@@ -28,25 +26,46 @@ var DataTableView = Backbone.View.extend({
 		var $allTHs = this.$el.find('th');
 		var $triggers = $allTHs.filter('[data-key=' + key + ']');
 		var sortClass = $triggers.hasClass('sort-ascending') ? 'sort-descending' : 'sort-ascending';
+		var direction = $triggers.hasClass('sort-ascending') ? 'desc' : 'asc';
+		// if ($triggers.hasClass('sort-ascending')) {
+		// 	var sortClass = 'sort-descending';
+		// 	var direction = 'desc';
+		// } else {
+		// 	var sortClass = 'sort-ascending';
+		// 	var direction = 'asc';
+		// }
 
 		$allTHs.removeClass('sort-ascending sort-descending');
 
 		$triggers.addClass(sortClass);
 
-		this.sortData(key);
+		this.sortData(key, direction);
 
 	},
 
-	sortData: function(key) {
+	sortData: function(key, dir) {
 		var sortKey = key || 'Name';
+		var sortDir = dir || 'asc';
 
-		console.log(sortKey);
+		// console.log(sortDir);
+		// console.log(sortKey);
 
-		// this.collection.comparator = key;
-		// this.collection.sort();
+		this.collection.comparator = function(model) {
+			return model.get(key);
+		}
+		this.collection.sort();
 
+		if (sortDir === 'desc') {
+			this.collection.set(this.collection.models.reverse());
+		}
 
 		this.render();
+	},
+
+	render: function() {
+		//console.log(this.collection.models);
+		this.$tbody.html(this.templateTbody(this.collection.models));
+		//return this.$el;
 	}
 
 });
