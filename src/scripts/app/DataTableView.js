@@ -44,7 +44,7 @@ var DataTableView = Backbone.View.extend({
 	},
 
 	sortData: function(key, dir) {
-		var sortKey = key || 'Name';
+		var sortKey = key || 'id';
 		var sortDir = dir || 'asc';
 
 		// console.log(sortDir);
@@ -53,10 +53,12 @@ var DataTableView = Backbone.View.extend({
 		this.collection.comparator = function(model) {
 			return model.get(key);
 		}
-		this.collection.sort();
-
 		if (sortDir === 'desc') {
+			//console.log('desc!');
 			this.collection.set(this.collection.models.reverse());
+		} else {
+			//console.log('asc!');
+			this.collection.sort();
 		}
 
 		this.render();
