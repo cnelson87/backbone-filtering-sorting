@@ -1,0 +1,62 @@
+
+/* DATA TABLE
+-------------------------------------------------------*/
+
+.data-table-container {
+
+	table {
+		width: 100%;
+		max-width: 100%;
+		background-color: transparent;
+		border-collapse: collapse;
+		margin: 0;
+
+		th, td {
+			min-width: 100px;
+			max-width: 300px;
+			padding: 5px 8px;
+			text-align: left;
+			vertical-align: top;
+
+			&.hidden {
+				display: none;
+			}
+
+		}
+
+		th {
+			cursor: pointer;
+			font-weight: bold;
+			vertical-align: bottom;
+			white-space: nowrap;
+			background-color: #ddd;
+
+			&:after {
+				content: "";
+				display: inline-block;
+				width: 11px;
+				height: 10px;
+				background: transparent url('#{$image-path}/carets.png') no-repeat 0 -10px;
+				margin-left: 6px;
+				opacity: 0.3;
+			}
+
+			&.sort-ascending:after {
+				opacity: 1.0;
+			}
+
+			&.sort-descending:after {
+				background-position: 0 0;
+				opacity: 1.0;
+			}
+
+		}
+
+		tbody tr:nth-child(even) td,
+		tbody tr:nth-child(even) th {
+			background-color: #efefef;
+		}
+
+	}
+
+}

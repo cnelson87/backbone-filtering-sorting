@@ -1,0 +1,37 @@
+<table>
+	<thead>
+		<tr>
+			<th data-key="Name">Name</th>
+			<th data-key="City">City</th>
+			<th data-key="State">State</th>
+			<th data-key="Country" class="hidden">Country</th>
+			<th data-key="Year">Year</th>
+			<th data-key="Amount">Amount</th>
+			<th data-key="Program">Program</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th data-key="Name">Name</th>
+			<th data-key="City">City</th>
+			<th data-key="State">State</th>
+			<th data-key="Country" class="hidden">Country</th>
+			<th data-key="Year">Year</th>
+			<th data-key="Amount">Amount</th>
+			<th data-key="Program">Program</th>
+		</tr>
+	</tfoot>
+	<tbody>
+		{{#each .}}
+		<tr data-id="{{attributes.id}}">
+			<td><a href="/url?id={{attributes.id}}">{{attributes.Name}}</a></td>
+			<td>{{attributes.City}}</td>
+			<td>{{attributes.State}}</td>
+			<td class="hidden">{{attributes.Country}}</td>
+			<td>{{attributes.Year}}</td>
+			<td>{{attributes.Amount}}</td>
+			<td>{{attributes.Program}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
