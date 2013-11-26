@@ -40,8 +40,9 @@ var AppRouter = Backbone.Router.extend({
 	processData: function(data) {
 		var self = this;
 
-		this.items = new Items();
-		this.items.add(data);
+		this.items = new Items([data]);
+		// this.items = new Items();
+		// this.items.add(data);
 
 
 		this.dataTableView = new DataTableView({
