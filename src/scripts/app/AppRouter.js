@@ -1,6 +1,5 @@
 
 var getAjaxContent = require('../utilities/GetAjaxContent');
-var templateDataTable = require('../../templates/data-table.hbs');
 var DataTableView = require('./DataTableView');
 var Items = require('./Items');
 
@@ -39,8 +38,9 @@ var AppRouter = Backbone.Router.extend({
 
 	processData: function(data) {
 		var self = this;
+		console.log(data[0]);
 
-		this.items = new Items([data]);
+		this.items = new Items(data);
 		// this.items = new Items();
 		// this.items.add(data);
 
