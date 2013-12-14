@@ -1,21 +1,30 @@
 
  module.exports = function(grunt) {
 
-	var handleify = require('handleify');
+	var pkg = grunt.file.readJSON('package.json');
+	var portNum = pkg.portNumber;
+	var lrPortNum = pkg.livereloadPortNum;
 	var path = require('path');
-	var root = path.normalize(__dirname+"/..");
+	var handleify = require('handleify');
+	var lrSnippet = require('connect-livereload')({port: lrPortNum});
+	var folderMount = function folderMount(connect, point) {
+		return connect.static(path.resolve(point));
+	};
 
 	// Project configuration.
 	grunt.initConfig({
 
 		// Metadata
-		pkg: grunt.file.readJSON('package.json'),
-		fileName: '<%= pkg.shortName %>',
+		pkg: pkg,
+		// pkgName: '<%= pkg.name %>',
+		// pkgDesc: '<%= pkg.description %>',
+		fileName: '<%= pkg.abbr %>',
 		metaTitle: '<%= pkg.title %>',
-		portNum : '<%= pkg.portNumber %>',
+		portNum : portNum,
+		lrPortNum : lrPortNum,
 
 		// File Paths
-		basePath : '.',
+		basePath		: '.',
 		sourcePath		: '<%= basePath %>/src',
 		sourceHTML		: '<%= sourcePath %>/html',
 		sourceIncludes	: '<%= sourceHTML %>/_includes',
@@ -38,7 +47,10 @@
 				options: {
 					hostname: null,
 					port: '<%= portNum %>',
-					base: '<%= sitePath %>/'
+					base: '<%= sitePath %>/',
+					middleware: function(connect, options) {
+						return [lrSnippet, folderMount(connect, options.base)];
+					}
 				}
 			}
 		},
@@ -47,7 +59,6 @@
 		'browserify2': {
 			compile: {
 				entry: '<%= sourceScripts %>/initialize.js',
-				//compile: '<%= sourceScripts %>/combined.js',
 				compile: '<%= outputScripts %>/<%= fileName %>.js',
 				// Precompile Handlebars templates
 				beforeHook: function(bundle) {
@@ -95,6 +106,28 @@
 			}
 		},
 
+		// JS Linting using jshint
+		'jshint': {
+			options: {
+				globals: {
+					$: true,
+					_: true,
+					jQuery: true,
+					Backbone: true,
+					Modernizr: true,
+					alert: true,
+					console: true,
+					module: true,
+					document: true
+				}
+			},
+			files: [
+				'src/scripts/**/*.js',
+				'!src/scripts/vendor/**/*',
+				'!Gruntfile.js'
+			]
+		},
+
 		// Compile sass to css
 		'sass': {
 			compile: {
@@ -113,7 +146,7 @@
 		// Watch files for changes
 		'watch': {
 			options: {
-				livereload: true
+				livereload: lrPortNum
 			},
 			html: {
 				files: '<%= sourceHTML %>/**/*.html',
@@ -121,7 +154,7 @@
 			},
 			scripts: {
 				files: '<%= sourceScripts %>/**/*.js',
-				tasks: ['browserify2']
+				tasks: ['jshint', 'browserify2']
 			},
 			styles: {
 				files: '<%= sourceStyles %>/**/*.*',
@@ -140,7 +173,7 @@
 	require('load-grunt-tasks')(grunt);
 
 	// Register custom tasks
-	grunt.registerTask('build', ['includereplace', 'browserify2', 'concat', 'sass']);
+	grunt.registerTask('build', ['includereplace', 'jshint', 'browserify2', 'concat', 'sass']);
 	grunt.registerTask('run', ['build', 'connect', 'watch']);
 
 };
