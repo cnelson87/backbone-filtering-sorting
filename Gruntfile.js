@@ -1,15 +1,8 @@
 
  module.exports = function(grunt) {
 
-	var pkg = grunt.file.readJSON('package.json');
-	var portNum = pkg.portNumber;
-	var lrPortNum = pkg.livereloadPortNum;
 	var path = require('path');
 	var handleify = require('handleify');
-	var lrSnippet = require('connect-livereload')({port: lrPortNum});
-	var folderMount = function folderMount(connect, point) {
-		return connect.static(path.resolve(point));
-	};
 
 	// Project configuration.
 	grunt.initConfig({
@@ -20,8 +13,8 @@
 		// pkgDesc: '<%= pkg.description %>',
 		fileName: '<%= pkg.abbr %>',
 		metaTitle: '<%= pkg.title %>',
-		portNum : portNum,
-		lrPortNum : lrPortNum,
+		portNum : '<%= pkg.portNumber %>',
+		lrPortNum : '<%= pkg.livereloadPortNum %>',
 
 		// File Paths
 		basePath		: '.',
@@ -48,9 +41,7 @@
 					hostname: null,
 					port: '<%= portNum %>',
 					base: '<%= sitePath %>/',
-					middleware: function(connect, options) {
-						return [lrSnippet, folderMount(connect, options.base)];
-					}
+					livereload: '<%= lrPortNum %>'
 				}
 			}
 		},
@@ -146,7 +137,7 @@
 		// Watch files for changes
 		'watch': {
 			options: {
-				livereload: lrPortNum
+				livereload: '<%= lrPortNum %>'
 			},
 			html: {
 				files: '<%= sourceHTML %>/**/*.html',
