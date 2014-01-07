@@ -27,14 +27,15 @@ var DataTableView = Backbone.View.extend({
 		var $triggers = $allTHs.filter('[data-key=' + key + ']');
 		var sortClass = $triggers.hasClass('sort-ascending') ? 'sort-descending' : 'sort-ascending';
 		var direction = $triggers.hasClass('sort-ascending') ? 'desc' : 'asc';
-		// if ($triggers.hasClass('sort-ascending')) {
-		// 	var sortClass = 'sort-descending';
-		// 	var direction = 'desc';
-		// } else {
-		// 	var sortClass = 'sort-ascending';
-		// 	var direction = 'asc';
-		// }
-
+/*
+		if ($triggers.hasClass('sort-ascending')) {
+			var sortClass = 'sort-descending';
+			var direction = 'desc';
+		} else {
+			var sortClass = 'sort-ascending';
+			var direction = 'asc';
+		}
+*/
 		$allTHs.removeClass('sort-ascending sort-descending');
 
 		$triggers.addClass(sortClass);
@@ -52,7 +53,7 @@ var DataTableView = Backbone.View.extend({
 
 		this.collection.comparator = function(model) {
 			return model.get(key);
-		}
+		};
 		if (sortDir === 'desc') {
 			//console.log('desc!');
 			this.collection.set(this.collection.models.reverse());

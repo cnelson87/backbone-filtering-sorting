@@ -8,7 +8,7 @@
 	grunt.initConfig({
 
 		// Metadata
-		pkg: pkg,
+		pkg: grunt.file.readJSON('package.json'),
 		// pkgName: '<%= pkg.name %>',
 		// pkgDesc: '<%= pkg.description %>',
 		fileName: '<%= pkg.abbr %>',
