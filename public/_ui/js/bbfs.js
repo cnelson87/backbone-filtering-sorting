@@ -626,4 +626,4 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
   return "\n	<table>\n		<thead>\n			<tr>\n				<th data-key=\"Name\">Name</th>\n				<th data-key=\"City\">City</th>\n				<th data-key=\"State\">State</th>\n				<th data-key=\"Country\" class=\"hidden\">Country</th>\n				<th data-key=\"Program\">Program</th>\n				<th data-key=\"Year\">Year</th>\n				<th data-key=\"Amount\" class=\"number\">Amount</th>\n			</tr>\n		</thead>\n		<tfoot>\n			<tr>\n				<th data-key=\"Name\">Name</th>\n				<th data-key=\"City\">City</th>\n				<th data-key=\"State\">State</th>\n				<th data-key=\"Country\" class=\"hidden\">Country</th>\n				<th data-key=\"Program\">Program</th>\n				<th data-key=\"Year\">Year</th>\n				<th data-key=\"Amount\" class=\"number\">Amount</th>\n			</tr>\n		</tfoot>\n		<tbody>\n		</tbody>\n	</table>\n";
   })
-},{"handleify":4}]},{},[8])
+},{"handleify":4}]},{},[8]);
