@@ -88,7 +88,7 @@
 				src: [
 					'<%= sourceVendor %>/modernizr.custom.min.js',
 					'<%= sourceVendor %>/jquery.min.js',
-					'<%= sourceVendor %>/underscore.min.js',
+					'<%= sourceVendor %>/lodash.min.js',
 					'<%= sourceVendor %>/backbone.min.js',
 					'<%= sourceVendor %>/backbone-super.min.js',
 					'<%= sourceVendor %>/class.js',
