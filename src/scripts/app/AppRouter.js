@@ -1,5 +1,5 @@
 
-var getAjaxContent = require('../utils/GetAjaxContent');
+var ajaxGet = require('utilities/AjaxGet');
 var DataTableView = require('./DataTableView');
 var Items = require('./Items');
 
@@ -28,7 +28,7 @@ var AppRouter = Backbone.Router.extend({
 	getData: function() {
 		var self = this;
 
-		$.when(getAjaxContent('/data/data.json')).done(function(response) {
+		$.when(ajaxGet('/_api/data.json')).done(function(response) {
 			self.processData(response);
 		}).fail(function(error) {
 			console.log(error);

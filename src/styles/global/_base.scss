@@ -1,8 +1,13 @@
-/*
-/* RESET / NORMALIZE / REBUILD
-/*-----------------------------------------------------*/
+//
+// RESET / NORMALIZE / REBUILD
+// -----------------------------------------------------
 
-html, body, div, span, object, iframe,
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, samp,
@@ -33,42 +38,45 @@ audio, canvas, video {
 
 body {
 	color: $text-primary;
-	font-family: Arial, Verdana, sans-serif;
+	font-family: $base-font;
 	// uncomment appropriate line to set default type size
-	// font-size: 100%; //16px
+	font-size: 100%; //16px
 	// font-size: 87.5%; //14px
-	font-size: 75.0%; //12px
+	// font-size: 75.0%; //12px
 	// font-size: 62.5%; //10px
-	line-height: 1.0;
-	background: #fff;
+	line-height: 1.5;
+	background: $white;
+
+	// Tablet+
+	@media (min-width: $tablet-min) {
+		font-size: 75.0%; //12px
+		line-height: 1.5; //18px
+	}
+
 }
 
-// a, a:link, a:visited
 a {
 	color: $link-color;
 	text-decoration: none;
-	@include prefix(transition, 'color .2s, background-color .2s');
+	transition: color 0.2s, background-color 0.2s;
 }
-// a:focus, a:hover, a:visited:hover, a:active
-a:focus, a:hover {
-	color: $link-hover-color;
+a:active, a:focus, a:hover {
+	color: $link-color-active;
 	text-decoration: underline;
 }
 
 p, ul, ol, dl, table, address {
-	font-size: 1.0em;
-	line-height: 1.5em;
 	margin-bottom: 1.5em;
 }
 	li {
-		margin: 0 0 8px 20px;
+		margin: 0 0 0.5em 20px;
 	}
 	dt {
 		font-weight: bold;
-		margin: 0 0 2px 0;
+		margin-bottom: 0.2em;
 	}
 	dd {
-		margin: 0 0 8px 0;
+		margin-bottom: 0.5em;
 	}
 
 table {
@@ -85,49 +93,44 @@ table {
 	}
 
 h1 {
-	color: $text-dark-gray;
-	font-family: 'Droid Sans', Arial, sans-serif;
+	color: $gray-dark;
+	font-family: $alt-font;
 	font-size: 32px;
 	font-weight: normal;
 	line-height: 36px;
-	margin: 0 0 18px 0;
+	margin-bottom: 18px;
 }
 h2, .h2 {
-	color: $text-dark-gray;
-	font-family: 'Droid Sans', Arial, sans-serif;
-	font-size: 22px;
+	color: $gray-dark;
+	font-family: $alt-font;
+	font-size: 24px;
 	font-weight: normal;
-	line-height: 24px;
-	margin: 0 0 12px 0;
+	line-height: 28px;
+	margin-bottom: 14px;
+}
+h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+	font-weight: bold;
+	line-height: 1.2;
+	margin-bottom: 0.2em;
 }
 h3, .h3 {
-	font-size: 16px;
-	font-weight: bold;
-	line-height: 18px;
-	margin: 0 0 8px 0;
+	font-size: 1.3em;
 }
 h4, .h4 {
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 16px;
-	margin: 0 0 6px 0;
+	font-size: 1.1em;
 }
 h5, .h5 {
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 14px;
-	margin: 0 0 4px 0;
+	font-size: 1.0em;
 }
 h6, .h6 {
-	font-size: 12px;
+	font-size: 1.0em;
 	font-weight: normal;
-	line-height: 14px;
-	margin: 0 0 2px 0;
 }
 
 b, strong {font-weight: bold;}
 
-i, em {	font-style: italic;}
+i, em {font-style: italic;}
+em em {font-style: normal;}
 
 sub, sup {
 	font-size: 75%;
@@ -145,12 +148,26 @@ q:before, q:after {
 	content: none;
 }
 blockquote {
-	/* note: must not leave any whitespace at the beginning of a blockquote in markup - Safari will render it */
-	color: $text-dark-gray;
+	// Note: must not leave any whitespace at the beginning of a
+	// blockquote in markup - Safari will render it.
+	color: $gray-dark;
 	font-size: 20px;
 	font-family: Georgia, Times, serif;
 	font-weight: normal;
-	line-height: 1.2em;
-	margin: 0 0 1.2em 0;
+	line-height: 24px;
+	margin-bottom: 24px;
 	padding: 0 20px;
+}
+
+hr {
+	clear: both;
+	background: none;
+	border-top: 2px solid $border-color-med;
+	margin: 1.5em 0;
+}
+
+img {
+	width: auto;
+	max-width: 100%;
+	height: auto;
 }

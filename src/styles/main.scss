@@ -1,0 +1,18 @@
+//
+// MAIN
+// -----------------------------------------------------
+
+
+// configuration
+@import "./config/variables";
+@import "./config/mixins";
+
+// global styles
+@import "./global/base";
+@import "./global/breakpoints";
+@import "./global/utilities";
+@import "./global/forms";
+@import "./global/layout";
+
+// custom components
+@import "./custom/datatable";

@@ -1,0 +1,50 @@
+//
+// VARIABLES
+// -----------------------------------------------------
+
+
+// Typography
+$base-font: Arial, sans-serif;
+$alt-font: "Open Sans", Arial, sans-serif;
+
+// Colors
+$black: #000;
+$white: #fff;
+$gray-dark: #333;
+$gray-med: #999;
+$gray-light: #ccc;
+$gray-xlight: #dedede;
+$gray-xlight-alt: #cdcdcd;
+$text-primary: #010101;
+$link-color: #900;
+$link-color-active: #c00;
+$button-color: #900;
+$button-color-active: #c00;
+$error-color: #900;
+$border-color-dark: #333;
+$border-color-med: #999;
+$border-color-light: #ccc;
+$border-color-xlight: #dedede;
+
+// Breakpoints
+$mobile-med:    400px;
+$mobile-wide:   600px;
+$mobile-max:    767px;
+$tablet-min:    768px;
+$tablet-max:    1023px;
+$desktop-min:   1024px;
+$desktop-lrg:   1280px;
+$desktop-xlrg:  1600px;
+$desktop-xxlrg: 1920px;
+
+// Container Widths
+$min-width: 320px;
+$mobile-container-width: 100%;
+$mobile-container-max-width: 600px;
+$tablet-container-width: 748px;
+$desktop-container-width: 992px;
+$desktop-wide-container-width: 1200px;
+
+// Paths
+$image-path: "../images";
+$font-path: "../fonts";

@@ -1,0 +1,237 @@
+//
+// UTILITIES
+// -----------------------------------------------------
+
+
+/**
+/*	General styles
+/**/
+
+html.no-js .hide-no-js {display: none;}
+html.js-enabled .hide-js-enabled {display: none;}
+
+big, .big {font-size: 16px;}
+
+small, .small, .note {font-size: 10px;}
+
+.alert, .error, .important, .required {
+	color: $error-color;
+	font-weight: bold;
+}
+
+.clear {clear: both;}
+
+.accelerate {
+	@include accelerate();
+}
+
+.clearfix {
+	@include clearfix();
+}
+
+.hidetext {
+	@include hidetext();
+}
+
+.offscreen {
+	@include offscreen();
+}
+
+.pull-right {float: right;}
+.pull-left {float: left;}
+
+.align-right {text-align: right;}
+.align-left {text-align: left;}
+.align-center {text-align: center;}
+
+.block {display: block;}
+.inline {display: inline;}
+.inline-block {display: inline-block;}
+
+.hidden {visibility: hidden;}
+
+.nowrap {white-space: nowrap;}
+
+.normal {
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none;
+}
+
+.lower {text-transform: lowercase;}
+
+.upper {text-transform: uppercase;}
+
+.underline {text-decoration: underline;}
+
+.strike {text-decoration: line-through;}
+
+/*** /General styles ***/
+
+
+/**
+/*	List styles
+/**/
+
+nav ul, nav ol {list-style: none;}
+
+ul.disc-list {list-style-type: disc;}
+ul.circle-list {list-style-type: circle;}
+ul.square-list {list-style-type: square;}
+ol.numbered-list {list-style: decimal;}
+ol.lower-alpha {list-style: lower-alpha;}
+ol.upper-alpha {list-style: upper-alpha;}
+ol.lower-roman {list-style: lower-roman;}
+ol.upper-roman {list-style: upper-roman;}
+
+ul.plain, ol.plain {list-style: none;}
+
+ul.inline, ol.inline {
+	list-style: none;
+	> li {
+		display: inline-block;
+		margin: 0 0.5em;
+	}
+}
+
+/*** /List styles ***/
+
+
+/**
+/*	Img styles
+/**/
+
+img.block {
+	display: block;
+	margin: 0 0 1.0em 0;
+}
+
+img.inline {
+	display: inline;
+	margin: 0 0.2em;
+	vertical-align: bottom;
+}
+
+img.inset-left {
+	float: left;
+	margin: 0 20px 1.0em 0;
+}
+
+img.inset-right {
+	float: right;
+	margin: 0 0 1.0em 20px;
+}
+
+/*** /Img styles ***/
+
+
+/**
+/*	Link styles
+/**/
+
+
+// Placeholder
+
+
+/*** /Link styles ***/
+
+
+/**
+*	Responsive iframe (youtube, vimeo, google maps, etc)
+**/
+.responsive-iframe-16x9,
+.responsive-iframe-4x3 {
+	width: 100%;
+	margin-bottom: 1.0em;
+	position: relative;
+	> iframe {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+}
+.responsive-iframe-16x9 {
+	padding-top: 56.25%;
+}
+.responsive-iframe-4x3 {
+	padding-top: 75.0%;
+}
+/*** /Responsive iframe ***/
+
+
+/**
+*	Ajax loader overlay & spinner
+**/
+
+div.loader-overlay {
+	width: 100%;
+	height: 100%;
+	background: rgba($gray-xlight, 0.5) url("#{$image-path}/spinner.gif") no-repeat center center;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/*** /Ajax loader overlay & spinner ***/
+
+
+/**
+/*	Misc styles
+/**/
+
+div.intro {
+	color: $gray-med;
+	font-size: 1.3em;
+	margin-bottom: 2.0em;
+}
+
+/*** /Misc styles ***/
+
+
+/**
+*	Responsive show / hide utility classes
+**/
+
+.show-mobile {display: none;}
+.show-mobile-block {display: none;}
+.show-mobile-inline {display: none;}
+.show-mobile-inline-block {display: none;}
+.show-tablet {display: none;}
+.show-tablet-block {display: none;}
+.show-tablet-inline {display: none;}
+.show-tablet-inline-block {display: none;}
+.show-desktop {display: none;}
+.show-desktop-block {display: none;}
+.show-desktop-inline {display: none;}
+.show-desktop-inline-block {display: none;}
+
+// Mobile
+@media (max-width: $mobile-max) {
+	.hide-mobile {display: none;}
+	.show-mobile {display: inherit;}
+	.show-mobile-block {display: block;}
+	.show-mobile-inline {display: inline;}
+	.show-mobile-inline-block {display: inline-block;}
+}
+
+// Tablet
+@media (min-width: $tablet-min) and (max-width: $tablet-max) {
+	.hide-tablet {display: none;}
+	.show-tablet {display: inherit;}
+	.show-tablet-block {display: block;}
+	.show-tablet-inline {display: inline;}
+	.show-tablet-inline-block {display: inline-block;}
+}
+
+// Desktop
+@media (min-width: $desktop-min) {
+	.hide-desktop {display: none;}
+	.show-desktop {display: inherit;}
+	.show-desktop-block {display: block;}
+	.show-desktop-inline {display: inline;}
+	.show-desktop-inline-block {display: inline-block;}
+}
+
+/*** /Responsive show / hide utility classes ***/

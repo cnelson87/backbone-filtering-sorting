@@ -1,174 +1,96 @@
 
  module.exports = function(grunt) {
 
-	var path = require('path');
-	var handleify = require('handleify');
+	'use strict';
 
-	// Project configuration.
-	grunt.initConfig({
+	var path		= require('path');
+	var cwd			= process.cwd();
+	var pkg			= grunt.file.readJSON('package.json');
 
-		// Metadata
-		pkg: grunt.file.readJSON('package.json'),
-		// pkgName: '<%= pkg.name %>',
-		// pkgDesc: '<%= pkg.description %>',
-		fileName: '<%= pkg.abbr %>',
-		metaTitle: '<%= pkg.title %>',
-		portNum : '<%= pkg.portNumber %>',
-		lrPortNum : '<%= pkg.livereloadPortNum %>',
+	require('load-grunt-config')(grunt, {
+		configPath: path.join(cwd,'grunt_tasks'),
+		init: true,
+		data: {
 
-		// File Paths
-		basePath		: '.',
-		sourcePath		: '<%= basePath %>/src',
-		sourceData		: '<%= sourcePath %>/data',
-		sourceHTML		: '<%= sourcePath %>/html',
-		sourceIncludes	: '<%= sourceHTML %>/_includes',
-		sourceScripts	: '<%= sourcePath %>/scripts',
-		sourceStyles	: '<%= sourcePath %>/styles',
-		sourceTemplates	: '<%= sourcePath %>/templates',
-		sourceImages	: '<%= sourcePath %>/images',
-		sourceVendor	: '<%= sourcePath %>/vendor',
-		sitePath		: '<%= basePath %>/public',
-		outputData		: '<%= sitePath %>/_data',
-		outputAssets	: '<%= sitePath %>/_ui',
-		outputScripts	: '<%= outputAssets %>/js',
-		outputStyles	: '<%= outputAssets %>/css',
-		outputVendor	: '<%= outputScripts %>/lib',
-		outputImages	: '<%= outputAssets %>/img',
+			// Pkg data
+			pkg			: pkg,
+			pkgName		: pkg.name,
+			metaTitle	: pkg.title,
+			pkgDesc		: pkg.description,
+			assetName	: pkg.namespace,
+			portNum		: pkg.portNumber,
+			lrPortNum	: pkg.livereloadPortNum,
 
+			// source file paths
+			sourcePath			: './src',
+			sourceAssets		: '<%= sourcePath %>/assets',
+			sourceData			: '<%= sourcePath %>/data',
+			sourceHTML			: '<%= sourcePath %>/html',
+			sourceIncludes		: '<%= sourceHTML %>/_includes',
+			sourceAudio			: '<%= sourceAssets %>/audio',
+			sourceVideo			: '<%= sourceAssets %>/video',
+			sourceFonts			: '<%= sourceAssets %>/fonts',
+			sourceImages		: '<%= sourceAssets %>/images',
+			sourceScripts		: '<%= sourcePath %>/scripts',
+			sourceStyles		: '<%= sourcePath %>/styles',
+			sourceTemplates		: '<%= sourcePath %>/templates',
+			sourceVendor		: '<%= sourcePath %>/vendor',
 
-		// Run web server
-		'connect': {
-			dev: {
-				options: {
-					port: '<%= portNum %>',
-					base: '<%= sitePath %>/',
-					livereload: '<%= lrPortNum %>'
-				}
-			}
+			// local file paths
+			localPath			: './_builds/local',
+			localData			: '<%= localPath %>/_api',
+			localAssets			: '<%= localPath %>/_assets',
+			localAudio			: '<%= localAssets %>/audio',
+			localVideo			: '<%= localAssets %>/video',
+			localFonts			: '<%= localAssets %>/fonts',
+			localImages			: '<%= localAssets %>/images',
+			localScripts		: '<%= localAssets %>/scripts',
+			localStyles			: '<%= localAssets %>/styles',
+
+			// public file paths
+			publicPath			: './_builds/public',
+			publicData			: '<%= publicPath %>/_api',
+			publicAssets		: '<%= publicPath %>/_assets',
+			publicAudio			: '<%= publicAssets %>/audio',
+			publicVideo			: '<%= publicAssets %>/video',
+			publicFonts			: '<%= publicAssets %>/fonts',
+			publicImages		: '<%= publicAssets %>/images',
+			publicScripts		: '<%= publicAssets %>/scripts',
+			publicStyles		: '<%= publicAssets %>/styles',
+
+			// temp file paths (not currently used)
+			tempPath			: './_builds/temp'
+
 		},
-
-		// Compile javascript modules
-		'browserify': {
-			compile: {
-				src: '<%= sourceScripts %>/initialize.js',
-				dest: '<%= outputScripts %>/<%= fileName %>.js',
-				options: {
-					transform: ['handleify'],
-					debug: true
-				}
-			}
-		},
-
-		// Build static HTML pages with includes
-		'includereplace': {
-			dist: {
-				options: {
-					globals: {
-						"meta-title": "<%= metaTitle %>",
-						"file-name": "<%= fileName %>"
-					},
-					includesDir: '<%= sourceIncludes %>'
-				},
-				files: [{
-					src: ['**/*.html', '!_includes/*.html'],
-					dest: '<%= sitePath %>/',
-					expand: true,
-					cwd: '<%= sourceHTML %>/'
-				}]
-			}
-		},
-
-		// Concatenates script files into a single file
-		'concat': {
-			options: {
-				separator: '\n;\n'
-				//separator: '\n\n'
-			},
-			vendor: {
-				src: [
-					'<%= sourceVendor %>/modernizr.custom.min.js',
-					'<%= sourceVendor %>/jquery.min.js',
-					'<%= sourceVendor %>/lodash.min.js',
-					'<%= sourceVendor %>/backbone.min.js',
-					'<%= sourceVendor %>/backbone-super.min.js',
-					'<%= sourceVendor %>/class.js',
-					'<%= sourceScripts %>/shims/classList.js'
-				],
-				dest: '<%= outputVendor %>/vendor.js'
-			}
-		},
-
-		// JS Linting using jshint
-		'jshint': {
-			options: {
-				globals: {
-					$: true,
-					_: true,
-					jQuery: true,
-					Backbone: true,
-					Modernizr: true,
-					TweenMax: true,
-					alert: true,
-					console: true,
-					module: true,
-					document: true
-				}
-			},
-			files: [
-				'<%= sourceScripts %>/**/*.js',
-				'!<%= sourceScripts %>/shims/classList.js',
-				'!<%= sourceVendor %>/**/*',
-				'!Gruntfile.js'
-			]
-		},
-
-		// Compile sass to css
-		'sass': {
-			compile: {
-				options: {
-					//style: 'expanded',
-					style: 'compact',
-					debug: false
-				},
-				files: [{
-					src: '<%= sourceStyles %>/styles.scss',
-					dest: '<%= outputStyles %>/<%= fileName %>.css'
-				}]
-			}
-		},
-
-		// Watch files for changes
-		'watch': {
-			options: {
-				spawn: false,
-				livereload: '<%= lrPortNum %>'
-			},
-			html: {
-				files: '<%= sourceHTML %>/**/*.html',
-				tasks: ['includereplace']
-			},
-			scripts: {
-				files: '<%= sourceScripts %>/**/*.js',
-				tasks: ['jshint', 'browserify']
-			},
-			styles: {
-				files: '<%= sourceStyles %>/**/*.*',
-				tasks: ['sass']
-			},
-			templates: {
-				files: '<%= sourceTemplates %>/**/*.hbs',
-				tasks: ['browserify']
-			}
+		loadGruntTasks: {
+			config: require('./package.json'),
+			scope: 'devDependencies',
+			pattern: 'grunt-*'
 		}
-
 	});
-	// end Grunt task config
 
-	// Load task dependencies
-	require('load-grunt-tasks')(grunt);
 
 	// Register custom tasks
-	grunt.registerTask('build', ['includereplace', 'jshint', 'browserify', 'concat', 'sass']);
-	grunt.registerTask('run', ['build', 'connect', 'watch']);
+	grunt.registerTask('build', 'generate a build', function(target) {
+		var target = (target === 'dev') ? 'dev' : 'dist';
+		var tasks = [
+			'clean:' + target,
+			'includereplace:' + target,
+			'copy:' + target,
+			'sass:' + target,
+			'autoprefixer:' + target,
+			'jshint',
+			'concat:' + target + 'libs',
+			'browserify:' + target
+		];
+		// optimize for dist build only
+		if (target === 'dist') {
+			tasks.push('cssmin');
+			tasks.push('uglify');
+		}
+		grunt.task.run(tasks);
+	});
+	grunt.registerTask('run', ['build:dev', 'connect', 'watch']);
+
 
 };

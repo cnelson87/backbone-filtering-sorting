@@ -1,6 +1,7 @@
-/*
-/* FORM ELEMENTS
-/*-----------------------------------------------------*/
+//
+// FORMS
+// -----------------------------------------------------
+
 
 /**
 /*	basic form elements
@@ -18,8 +19,8 @@ legend {
 
 label, span.label {
 	display: inline-block;
-	color: $text-dark-gray;
-	font-size: 13px;
+	color: $gray-dark;
+	font-size: 14px;
 	font-weight: bold;
 	line-height: 16px;
 	padding-top: 2px; /* matches input padding-top for vertical alignment */
@@ -29,29 +30,28 @@ label, span.label {
 	}
 }
 label.disabled {
-	color: $text-light-gray;
+	color: $gray-light;
 }
 
 output {
 	display: inline-block;
-	color: $text-dark-gray;
-	font-size: 13px;
+	color: $gray-dark;
+	font-size: 14px;
 	font-weight: bold;
 	line-height: 16px;
 	padding-top: 2px; /* matches input padding-top for vertical alignment */
 }
 
 input, select, textarea, button {
-	color: $text-dark-gray;
+	color: $gray-dark;
 	font-family: Arial, sans-serif;
-	font-size: 13px;
+	font-size: 14px;
 	line-height: 16px;
 	vertical-align: top;
 	background: none;
 	border: 0;
 	margin: 0;
 	padding: 0;
-	@include prefix(box-sizing, border-box);
 }
 
 input:invalid,
@@ -62,19 +62,19 @@ textarea:invalid {
 }
 
 ::-webkit-input-placeholder {
-	color: $text-med-gray;
+	color: $gray-med;
 	opacity: 1;
 }
 ::-moz-placeholder {
-	color: $text-med-gray;
+	color: $gray-med;
 	opacity: 1;
 }
 :-ms-input-placeholder {
-	color: $text-med-gray;
+	color: $gray-med;
 	opacity: 1;
 }
 ::input-placeholder {
-	color: $text-med-gray;
+	color: $gray-med;
 	opacity: 1;
 }
 
@@ -86,6 +86,7 @@ input[type=email],
 input[type=number],
 input[type=tel],
 input[type=url],
+select,
 textarea {
 	width: 140px;
 	height: 24px;
@@ -97,21 +98,14 @@ textarea {
 select {
 	width: auto;
 	min-width: 80px;
+	// max-width: 200px;
 	max-width: 100%;
-	height: 24px;
-	border: 1px solid $border-color-light;
-	border-radius: 3px;
-	padding: 2px;
-	//@include prefix(appearance, none);
 }
 
 textarea {
 	width: 240px;
 	max-width: 100%;
 	height: 54px; // line-height x 3, + padding
-	border: 1px solid $border-color-light;
-	border-radius: 3px;
-	padding: 2px;
 }
 
 input[type=text]:focus,
@@ -140,7 +134,7 @@ input[type=tel].disabled,
 input[type=url].disabled,
 select[disabled], select.disabled,
 textarea[disabled], textarea.disabled {
-	color: #ccc;
+	color: $gray-light;
 	border-color: $border-color-xlight;
 }
 
@@ -184,11 +178,11 @@ select.input-auto {
 }
 
 textarea.textarea-med {
-	width: 280px;
+	width: 300px;
 	height: 70px; /* 16px * 4 line-height + 6px padding & border */
 }
 textarea.textarea-lrg {
-	width: 500px;
+	width: 480px;
 	height: 102px; /* 16px * 6 line-height + 6px padding & border */
 }
 
@@ -212,7 +206,7 @@ input[type=radio] {
 		cursor: default;
 
 		& + label {
-			color: $text-light-gray;
+			color: $gray-light;
 		}
 
 	}
@@ -243,22 +237,23 @@ input[type=reset],
 input[type=button],
 button {
 	cursor: pointer;
-	min-width: 88px;
-	font-size: 12px;
+	min-width: 100px;
+	font-size: 14px;
 	font-weight: bold;
+	line-height: 16px;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 	vertical-align: middle;
-	background: #ccc;
+	background: $gray-light;
 	border: 1px solid $border-color-dark;
 	border-radius: 3px;
 	padding: 4px 12px;
 	overflow: visible; // old IE width fix, no affect on other browsers
-	@include prefix(transition, 'color .2s, background-color .2s');
+	transition: color 0.2s, background-color 0.2s;
 
 	&:focus, &:hover {
-		background: #dedede;
+		background: $gray-xlight;
 		outline: none;
 	}
 
@@ -266,14 +261,14 @@ button {
 
 input.btn, input.sm-btn,
 button.btn, button.sm-btn {
-	color: #fff;
-	background: #900;
+	color: $white;
+	background: $button-color;
 }
 input.alt-btn, input.sm-alt-btn,
 button.alt-btn, button.sm-alt-btn {
-	color: #900;
-	background: #fff;
-	border-color: #900;
+	color: $button-color;
+	background: $white;
+	border-color: $button-color;
 }
 input.sm-btn, input.sm-alt-btn,
 button.sm-btn, button.sm-alt-btn {
@@ -286,15 +281,15 @@ input.btn:focus, input.btn:hover,
 input.sm-btn:focus, input.sm-btn:hover,
 button.btn:focus, button.btn:hover,
 button.sm-btn:focus, button.sm-btn:hover {
-	background: #c00;
+	background: $button-color-active;
 }
 input.alt-btn:focus, input.alt-btn:hover,
 input.sm-alt-btn:focus, input.sm-alt-btn:hover
 button.alt-btn:focus, button.alt-btn:hover,
 button.sm-alt-btn:focus, button.sm-alt-btn:hover {
-	color: #333;
-	background: #fff;
-	border-color: #333;
+	color: $gray-dark;
+	background: $white;
+	border-color: $gray-dark;
 }
 
 /* end buttons */
@@ -303,14 +298,14 @@ button.sm-alt-btn:focus, button.sm-alt-btn:hover {
 
 .form-note { /* note next to an input field */
 	display: inline-block;
-	color: $text-med-gray;
+	color: $gray-med;
 	font-size: 11px;
 	line-height: 15px;
 	margin: 5px 0 0 5px;
 }
 .form-message { /* message below an input field */
 	display: block;
-	color: $text-med-gray;
+	color: $gray-med;
 	font-size: 11px;
 	line-height: 15px;
 	margin-top: 5px;
@@ -415,10 +410,6 @@ ol.column-fields, ul.column-fields {
 	.column-fields > li {
 		width: 50%;
 		padding-right: 1em;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-ms-box-sizing:border-box;
-		-o-box-sizing:border-box;
 		box-sizing: border-box;
 	}
 	.column-fields > li:nth-child(odd) {

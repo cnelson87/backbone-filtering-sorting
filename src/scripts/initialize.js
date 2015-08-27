@@ -1,6 +1,6 @@
 
-var appRouter = require('./app/AppRouter');
+var AppRouter = require('./app/AppRouter');
 
 $(function() {
-	new appRouter();
+	new AppRouter();
 });

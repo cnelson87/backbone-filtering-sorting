@@ -1,6 +1,6 @@
 
-var templateDataTable = require('../../templates/data-table.hbs');
-var templateDataTableTbody = require('../../templates/data-table-tbody.hbs');
+var templateDataTable = require('templates/data-table.hbs');
+var templateDataTableTbody = require('templates/data-table-tbody.hbs');
 
 var DataTableView = Backbone.View.extend({
 
